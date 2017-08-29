@@ -1,0 +1,40 @@
+body {
+  background-color: #ffdbdb
+}
+
+#md-img {
+  width: 100px;
+height: 100px;
+margin-top: 1em;
+}
+#md-head-img {
+  width: 70%;
+margin-top: 1em;
+}
+#md-head-text {
+  margin-top: -.1em;
+}
+
+#main-container {
+  width: 80%;
+    margin-top: 10em;
+    border: 1px solid;
+}
+#md-head-row{
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+#md-form-row{
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+#md-text-row{
+    border: 1px solid;
+    border-collapse: collapse;
+    padding-top:1em;
+    padding-bottom:1em;
+    padding-left:2em;
+    padding-right:1em;
+}
