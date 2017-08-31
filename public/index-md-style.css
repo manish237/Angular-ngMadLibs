@@ -30,11 +30,16 @@ margin-top: 1em;
     border-collapse: collapse;
 }
 
-#md-text-row{
+#md-textf-row, #md-textm-row{
     border: 1px solid;
     border-collapse: collapse;
     padding-top:1em;
     padding-bottom:1em;
     padding-left:2em;
     padding-right:1em;
+}
+
+#gender-options{
+    display: inline;
+    position: relative;
 }
