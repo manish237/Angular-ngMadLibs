@@ -43,3 +43,8 @@ margin-top: 1em;
     display: inline;
     position: relative;
 }
+
+#btn-submit{
+    width: 300px;
+    margin:auto;
+}
