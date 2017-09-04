@@ -34,11 +34,11 @@
 
                 </div>
             </div>
-            <div class="row text-center" id="md-form-row" ng-if="ctrl.validForm===false">
+            <div class="row text-center" id="md-form-row" ng-show="ctrl.validForm===false">
                 <form class="form-horizontal" id="form-input" name="inputForm" novalidate ng-submit="ctrl.submit(inputForm)">
                     <h3 id="md-form-text">Provide the following words as:
-                        <select ng-model="selectedName" id="genderOptions" name="genderOptions" ng-change="ctrl.gender=selectedName" required>
-                            <option id="moption" value="M">Male</option>
+                        <select ng-model="ctrl.selectedName" id="genderOptions" name="genderOptions" ng-change="ctrl.gender=ctrl.selectedName" required>
+                            <option id="moption" value="M" selected>Male</option>
                             <option id="foption" value="F">Female</option>
                         </select>
                     </h3>
@@ -153,7 +153,7 @@
             <!--{{ctrl.validForm}}-->
             <!--{{ctrl.gender}}-->
             <!--{{ctrl.fname}}-->
-            <div id="md-text-content" ng-if="ctrl.validForm==true">
+            <div id="md-text-content" ng-show="ctrl.validForm==true">
                 <div class="row" id="md-textm-row" ng-if="ctrl.gender=='M'">
                     <p id="md-text-pm-1">{{ctrl.fname}} was a {{ctrl.jtitle}} who loved technology. Although he loved parts of her job, he absolutely hated {{ctrl.ttask}} and {{ctrl.dtask}}. So, {{ctrl.fname}} met with his life mentor {{ctrl.celeb}} who told him to learn how to {{ctrl.uskill}} with Thinkful. Thinkful didn't offer a course on {{ctrl.uskill}} so he studied programming instead.
                         <br><br>
@@ -167,7 +167,7 @@
                     </p>
                 </div>
                 <div class="col-sm-12 text-center">
-                    <input type="button" class="form-control" value="Start Over" id="btn-repeat" ng-click="ctrl.clear()">
+                    <input type="button" class="form-control" value="Start Over" id="btn-repeat" ng-click="ctrl.clear(inputForm)">
                 </div>
             </div>
         </div>

@@ -16,7 +16,9 @@ angular.module('myApp',['ngMessages'])
         // console.log(inputForm.$valid);
         // console.log($scope.valid)
     }
-    ctrl.clear = function(){
+    ctrl.clear = function(form){
+        form.$submitted=false;
+        ctrl.selectedName =null
         ctrl.validForm=false;
         ctrl.fname=null;
         ctrl.dtask=null;
