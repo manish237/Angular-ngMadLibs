@@ -12,82 +12,277 @@
     <body> 
         <div class="container" id="main-container" ng-controller="MyCtrl as ctrl">
             <div class="row" id="md-head-row">
-                <div class="col-md-4 text-center" id="md-img-sec">
+                <div class="col-md-2 text-center" id="md-img-sec">
                     <img src="images/mad-lib-happy-face.png" id="md-img" />
                 </div>
-                <div class="col-md-8 text-center" id="md-head-sec">
+                <div class="col-md-10 text-center" id="md-head-sec">
                     <img src="images/ng-mad-libs-logo.png" id="md-head-img" />
-                    <h2 id="md-head-text">Automate This! {{ctrl.gender}}</h2>
+                    <h2 id="md-head-text">Automate This!</h2>
+<!--                    <span>Gender {{ctrl.gender}}</span><br>
+                    <span>Valid! {{ctrl.validForm}}</span><br>
+                    <span>Form Submitted! {{inputForm.$submitted}}</span><br>
+                    <span>Error fname! {{inputForm.fname.$error}}</span><br>
+                    <span>Error dtask! {{inputForm.dtask.$error}}</span><br>
+                    <span>Error oceleb! {{inputForm.oceleb.$error}}</span><br>
+                    <span>Error jtitle! {{inputForm.jtitle.$error}}</span><br>
+                    <span>Error celeb! {{inputForm.celeb.$error}}</span><br>
+                    <span>Error hnum! {{inputForm.hnum.$error}}</span><br>
+                    <span>Error ttask! {{inputForm.ttask.$error}}</span><br>
+                    <span>Error uskill! {{inputForm.uskill.$error}}</span><br>
+                    <span>Error adj! {{inputForm.adj.$error}}</span><br>
+                    <span>ValidForm! {{inputForm.$valid}}</span><br>-->
+
                 </div>
             </div>
-            <div class="row text-center" id="md-form-row" >
-                <form class="form-horizontal" id="form-input">
-                <h3 id="md-form-text">Provide the following words as:
-                <select ng-model="selectedName" id="gender-options" ng-change="ctrl.gender=selectedName">
-                    <option id="moption" value="M">Male</option>
-                    <option id="foption" value="F">Female</option>
-                </select>
-                </h3>
+            <div class="row text-center" id="md-form-row" ng-show="ctrl.validForm===false">
+                <form class="form-horizontal" id="form-input" name="inputForm" novalidate ng-submit="ctrl.submit(inputForm)">
+                    <h3 id="md-form-text">Provide the following words as:
+                        <select ng-model="ctrl.selectedName" id="genderOptions" name="genderOptions" ng-change="ctrl.gender=ctrl.selectedName" required>
+                            <option id="moption" value="M" selected>Male</option>
+                            <option id="foption" value="F">Female</option>
+                        </select>
+                    </h3>
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.genderOptions.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                    </div>
                     <div class="col-md-12 text-center">
                         <div class="form-group">
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="fname" ng-init="fname='female name'"
-                                       id="fname" placeholder="female name">
+                                <!--<input type="text" class="form-control" ng-model="fname" id="fname" name="fname" placeholder="female name">-->
+                                <input type="text" class="form-control" ng-model="ctrl.fname" id="fname" name="fname" placeholder="female name" required
+                                       ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.fname.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                                    <span class="error" ng-message="pattern">Numbers not allowed</span>
+                                </div>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="dtask" ng-init="dtask='Dirty Task'"
-                                       id="dtask" placeholder="Dirty Task">
+                                <!--<input type="text" class="form-control" ng-model="dtask" id="dtask" name="dtask" placeholder="Dirty Task">-->
+                                <input type="text" class="form-control" ng-model="ctrl.dtask" id="dtask" name="dtask" placeholder="Dirty Task" required
+                                       ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.dtask.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                                    <span class="error" ng-message="pattern">Numbers not allowed</span>
+                                </div>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="oceleb" ng-init="oceleb='Obnoxious Celebrity'"
-                                       id="oceleb" placeholder="Obnoxious Celebrity">
+                                <!--<input type="text" class="form-control" ng-model="oceleb" id="oceleb" name="oceleb" placeholder="Obnoxious Celebrity">-->
+                                <input type="text" class="form-control" ng-model="ctrl.oceleb" id="oceleb" name="oceleb" placeholder="Obnoxious Celebrity" required
+                                       ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.oceleb.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                                    <span class="error" ng-message="pattern">Numbers not allowed</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="jtitle" ng-init="jtitle='job title'"
-                                       id="jtitle" placeholder="job title">
+                                <!--<input type="text" class="form-control" ng-model="jtitle" id="jtitle" name="jtitle" placeholder="job title">-->
+                                <input type="text" class="form-control" ng-model="ctrl.jtitle" id="jtitle" name="jtitle" placeholder="job title" required
+                                       ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.jtitle.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                                    <span class="error" ng-message="pattern">Numbers not allowed</span>
+                                </div>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="celeb" ng-init="celeb='Celebrity'"
-                                       id="celeb" placeholder="Celebrity">
+                                <!--<input type="text" class="form-control" ng-model="celeb" id="celeb" name="celeb" placeholder="Celebrity">-->
+                                <input type="text" class="form-control" ng-model="ctrl.celeb" id="celeb" name="celeb" placeholder="Celebrity" required
+                                       ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.celeb.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                                    <span class="error" ng-message="pattern">Numbers not allowed</span>
+                                </div>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="hnum" ng-init="hnum='Huge Number'"
-                                       id="hnum" placeholder="Huge Number">
+                                <!--<input type="text" class="form-control" ng-model="hnum" id="hnum" name="hnum" placeholder="Huge Number">-->
+                                <input type="text" class="form-control" ng-model="ctrl.hnum" id="hnum" name="hnum" placeholder="Huge Number" required
+                                       ng-pattern="/^[0-9]*$/" ng-minlength="2">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.hnum.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 2 digts expected</span>
+                                    <span class="error" ng-message="pattern">Only numbers allowed</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="ttask" ng-init="ttask='Tedious Task'"
-                                       id="ttask" placeholder="Tedious Task">
+                                <!--<input type="text" class="form-control" ng-model="ttask" id="ttask" name="ttask" placeholder="Tedious Task">-->
+                                <input type="text" class="form-control" ng-model="ctrl.ttask" id="ttask" name="ttask" placeholder="Tedious Task" required
+                                       ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.ttask.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                                    <span class="error" ng-message="pattern">Numbers not allowed</span>
+                                </div>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="uskill" ng-init="uskill='Tedious Task'"
-                                       id="uskill" placeholder="Useless Skill">
+                                <!--<input type="text" class="form-control" ng-model="uskill" id="uskill" name="uskill" placeholder="Useless Skill">-->
+                                <input type="text" class="form-control" ng-model="ctrl.uskill" id="uskill" name="uskill" placeholder="Useless Skill" required
+                                       ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.uskill.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                                    <span class="error" ng-message="pattern">Numbers not allowed</span>
+                                </div>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="adj" ng-init="adj='Adjective'"
-                                       id="adj" placeholder="Adjective">
+                                <!--<input type="text" class="form-control" ng-model="adj" id="adj" name="adj" placeholder="Adjective">-->
+                                <input type="text" class="form-control" ng-model="ctrl.adj" id="adj" name="adj" placeholder="Adjective" required
+                                       ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                                <div ng-if="inputForm.$submitted" ng-messages="inputForm.adj.$error">
+                                    <span class="error" ng-message="required">Field is required!</span>
+                                    <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                                    <span class="error" ng-message="pattern">Numbers not allowed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" class="form-control" value="Generate Mad Libs" id="btn-submit">
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="row" id="md-textm-row" ng-if="ctrl.gender=='M'">
-                <p id="md-text-pm-1">{{fname}} was a {{jtitle}} who loved technology. Although he loved parts of her job, he absolutely hated {{ttask}} and {{dtask}}. So, {{fname}} met with his life mentor {{celeb}} who told him to learn how to {{uskill}} with Thinkful. Thinkful didn't offer a course on {{uskill}} so he studied programming instead.
-                    <br><br>
-                    What a great decision! With his new skills, {{fname}} built a(n) {{adj}} robot named {{oceleb}} that not only loved {{dtask}} but did it {{hnum}} times faster.
-                </p>
-            </div>
-            <div class="row" id="md-textf-row" ng-if="ctrl.gender=='F'">
-                <p id="md-text-pf-1">{{fname}} was a {{jtitle}} who loved technology. Although she loved parts of her job, she absolutely hated {{ttask}} and {{dtask}}. So, {{fname}} met with her life mentor {{celeb}} who told her to learn how to {{uskill}} with Thinkful. Thinkful didn't offer a course on {{uskill}} so she studied programming instead.
-                    <br><br>
-                    What a great decision! With her new skills, {{fname}} built a(n) {{adj}} robot named {{oceleb}} that not only loved {{dtask}} but did it {{hnum}} times faster.
-                </p>
+            <!--{{ctrl.validForm}}-->
+            <!--{{ctrl.gender}}-->
+            <!--{{ctrl.fname}}-->
+            <div id="md-text-content" ng-show="ctrl.validForm==true">
+                <div class="row" id="md-textm-row" ng-if="ctrl.gender=='M'">
+                    <p id="md-text-pm-1">{{ctrl.fname}} was a {{ctrl.jtitle}} who loved technology. Although he loved parts of her job, he absolutely hated {{ctrl.ttask}} and {{ctrl.dtask}}. So, {{ctrl.fname}} met with his life mentor {{ctrl.celeb}} who told him to learn how to {{ctrl.uskill}} with Thinkful. Thinkful didn't offer a course on {{ctrl.uskill}} so he studied programming instead.
+                        <br><br>
+                        What a great decision! With his new skills, {{ctrl.fname}} built a(n) {{ctrl.adj}} robot named {{ctrl.oceleb}} that not only loved {{ctrl.dtask}} but did it {{ctrl.hnum}} times faster.
+                    </p>
+                </div>
+                <div class="row" id="md-textf-row" ng-if="ctrl.gender=='F'">
+                    <p id="md-text-pf-1">{{ctrl.fname}} was a {{ctrl.jtitle}} who loved technology. Although she loved parts of her job, she absolutely hated {{ctrl.ttask}} and {{ctrl.dtask}}. So, {{ctrl.fname}} met with her life mentor {{ctrl.celeb}} who told her to learn how to {{ctrl.uskill}} with Thinkful. Thinkful didn't offer a course on {{ctrl.uskill}} so she studied programming instead.
+                        <br><br>
+                        What a great decision! With her new skills, {{ctrl.fname}} built a(n) {{ctrl.adj}} robot named {{ctrl.oceleb}} that not only loved {{ctrl.dtask}} but did it {{ctrl.hnum}} times faster.
+                    </p>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <input type="button" class="form-control" value="Start Over" id="btn-repeat" ng-click="ctrl.clear(inputForm)">
+                </div>
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+
         <script src="myApp.js"></script>
     </body>     
 </html>
+
+<!--
+<div class="row text-center" id="md-form-row" ng-if="ctrl.valid===false">
+    <form class="form-horizontal" id="form-input" name="inputForm" novalidate ng-submit="ctrl.submit()">
+        <h3 id="md-form-text">Provide the following words as:
+            <select ng-model="selectedName" id="genderOptions" name="genderOptions" ng-change="ctrl.gender=selectedName" required>
+                <option id="moption" value="M">Male</option>
+                <option id="foption" value="F">Female</option>
+            </select>
+            <div ng-if="inputForm.$submitted" ng-messages="inputForm.genderOptions.$error">
+                <span class="error" ng-message="required">Field is required!</span>
+            </div>
+        </h3>
+        <div class="col-md-12 text-center">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="fname" id="fname" name="fname" placeholder="female name" required
+                           ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.fname.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                        <span class="error" ng-message="pattern">Numbers not allowed</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="dtask" id="dtask" name="dtask" placeholder="Dirty Task" required
+                           ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.dtask.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                        <span class="error" ng-message="pattern">Numbers not allowed</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="oceleb" id="oceleb" name="oceleb" placeholder="Obnoxious Celebrity" required
+                           ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.oceleb.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                        <span class="error" ng-message="pattern">Numbers not allowed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="jtitle" id="jtitle" name="jtitle" placeholder="job title" required
+                           ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.jtitle.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                        <span class="error" ng-message="pattern">Numbers not allowed</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="celeb" id="celeb" name="celeb" placeholder="Celebrity" required
+                           ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.celeb.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                        <span class="error" ng-message="pattern">Numbers not allowed</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="hnum" id="hnum" name="hnum" placeholder="Huge Number" required
+                           ng-pattern="/^[0-9]*$/" ng-minlength="2">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.hnum.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 2 digts expected</span>
+                        <span class="error" ng-message="pattern">Only numbers allowed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="ttask" id="ttask" name="ttask" placeholder="Tedious Task" required
+                           ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.ttask.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                        <span class="error" ng-message="pattern">Numbers not allowed</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="uskill" id="uskill" name="uskill" placeholder="Useless Skill" required
+                           ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.uskill.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                        <span class="error" ng-message="pattern">Numbers not allowed</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="adj" id="adj" name="adj" placeholder="Adjective" required
+                           ng-pattern="/^[a-zA-Z ]*$/" ng-minlength="5">
+                    <div ng-if="inputForm.$submitted" ng-messages="inputForm.adj.$error">
+                        <span class="error" ng-message="required">Field is required!</span>
+                        <span class="error" ng-message="minlength">Minimum 5 characters expected</span>
+                        <span class="error" ng-message="pattern">Numbers not allowed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 text-center">
+                    <input type="submit" class="form-control" value="Generate Mad Libs" id="btn-submit">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>-->
